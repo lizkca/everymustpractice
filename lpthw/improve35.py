@@ -49,6 +49,35 @@ def palace():
     财富考验
     """
     print("你来到一座宫殿里，里面金碧辉煌，看得你眼睛都花了，你一点都不敢触摸。")
+    print("你沿着路直走，来到一间看到一位老僧，慈眉善眼的。")
+    print("旁边是一间密室，门是开着的，一推就开。")
+    print("你准备怎么做？")
+
+
+    choice = input("> ")
+    if choice == "talk" or choice == "问话":
+        print("阿弥陀佛。老僧对你念了一句。")
+    elif choice == "open" or choice == "push" or choice == "开门":
+        print("一进密室，你发现这里都是一块块的黄金。金光灿灿的。你准备拿多少块？") 
+        gold = input("> ")
+        if gold.isdigit():
+            how_much = int(gold)
+            if how_much > 100:
+                dead("你得到一堆黄金了。")
+            elif how_much < 5:
+                dead("你得到了你拿的黄金。")
+            elif how_much == 6:
+                print("你拿了六块黄金。突然老僧出现在你面前，慈祥的对你说，老衲愿意收你为徒，你可乐意？")
+                print("恭喜，你成为南帝的门下。")
+            else:
+                luck = random.choice([1,2,3,4,5,6])
+                if luck == 6:
+                    print("突然老僧出现在你面前，说，你运气太好了。你成为南帝的门下。")
+                else:
+                    dead("门突然关上了，你不知道怎样才能出来。")
+        else:
+            dead("大哥，学一下输入数字吧。")
+        
 
 def mountain():
     """
@@ -56,7 +85,28 @@ def mountain():
     西毒
     人性考验
     """
+    luck = random.choice([1,2,3,4,5,6,7,8,9,10])
     print("你来到一座山上，传说这山上出现过白色的骆驼，当地人叫白驼山。")
+    print("你突然看到一条颜色鲜艳的蛇，显然是一条很毒的🐍，在咬一位老者的胳膊。")
+    print("你准备怎么做？")
+    
+    choice = input("> ")
+    if choice == "打蛇":
+        print("老者勃然大怒，敢打我的蛇，去死吧。")
+        dead("你被西毒打死了。")
+    elif choice == "打老者":
+        print("老者哈哈大笑，你心肠够毒，正合我胃口，我就收你为徒吧。")
+        print("恭喜，你成为西毒门下。")
+    else:
+        if luck < 5:
+            dead("突然，不知什么时候，你觉得自己中毒了。")
+        elif luck >= 5 and luck < 8:
+            print("忽然之间，从老者的衣袖飞出两条蛇来，盘在你的两只手。")
+            print("你吓得一动不敢动。")
+            print("老者对你笑了笑，说，你我有缘，这两条蛇送你了。我再给你个宝贝，它们就会认你当主人了。")
+            dead("你获得一个控蛇珠，和两条剧毒的金冠角蛇。")
+        elif luck >= 8:
+            print("老者对着你看了又看。说，是你了，我终于等到你了。我将把我的全部功夫传授给你，你将成为白驼山的少主人。继承我的一切。")
 
 def temple():
     """
@@ -65,69 +115,43 @@ def temple():
     耐心考验
     """
     print("你来到一座庙宇里，庙里供着一位武将，武将手里拿着一根长长的铁枪。") 
-
-
-
-def bear_room():
-    print("There is a bear here.")
-    print("The bear has a bunch of honey.")
-    print("The fat bear is in front of another door.")
-    print("How are you going to move the bear?")
-    bear_moved = False
-
-    while True:
-        choice = input("> ")
-
-        if choice == "take honey":
-            dead("The bear looks at you then slaps your face off.")
-        elif choice == "taunt bear" and not bear_moved:
-            print("The bear has moved from the door.")
-            print("You can go through it now.")
-            bear_moved = True
-        elif choice == "taunt bear" and bear_moved:
-            dead("The bear gets pissed off and chews your leg off.")
-        elif choice == "open door" and bear_moved:
-            gold_room()
-        else:
-            print("I got no idea what that means.")
-
-
-def cthulhu_room():
-    print("Here you see the great evil Cthulhu.")
-    print("He, it, whatever stares at you and you go insane.")
-    print("Do you flee for your life or eat your head?")
-
+    print("你看到一位中年的乞丐，在睡觉。")
+    print("你准备怎么做？")
+    
     choice = input("> ")
+    wait_times = random.choice([10,20,30])
+    for i in range(wait_times):
+        if choice == "wait" or choice == "等":
+            print("你等了又等。乞丐还是呼呼大睡。")
+            choice = input("> ")
+        else:
+            dead("不知怎么了，一股神奇的力量，托着你，你像腾云驾雾一样飞出了庙宇。你再也没有勇气进去了。")
+    print("乞丐终于睡醒了。伸伸懒腰。说，走我带你去吃好吃的。顺便教你两手。")
+    print("恭喜，你成为北丐门下。")
 
-    if "flee" in choice:
-        start()
-    elif "head" in choice:
-        dead("Well that was tasty!")
-    else:
-        cthulhu_room()
-
+        
 
 def dead(why):
-    print(why, "Good job!")
+    print(why, "挺不错的!")
     exit(0)
 
 
 def start():
-    print("你来到一处神秘的地方.")
-    print("东南西北都可以去.")
+    print("你来到一处神秘的地方。")
+    print("东南西北都可以去。")
     print("你要去那边?")
 
     choice = input("> ")
 
-    if choice == "east" or choice == "东":
+    if choice == "east" or choice == "e" or choice == "东":
         insular()
-    elif choice == "south" or choice == "南":
+    elif choice == "south" or choice == "s" or choice == "南":
         palace()
-    elif choice == "west" or choice == "西":
+    elif choice == "west" or choice == "w" or choice == "西":
         mountain()
-    elif choice == "north" or choice == "北":
+    elif choice == "north" or choice == "n" or choice == "北":
         temple()
     else:
-        dead("这个方向没路走.")
+        dead("这个方向没路走。")
 
 start()
